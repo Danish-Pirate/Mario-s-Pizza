@@ -11,6 +11,9 @@ public class Pizza {
     this.pizzaIngredienser = pizzaIngredienser;
     this.pizzaPris = pizzaPris;
   }
+  public Pizza() {
+
+  }
 
   public int getPizzaNummer() {
     return pizzaNummer;
