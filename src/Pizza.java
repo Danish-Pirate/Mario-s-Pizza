@@ -1,9 +1,9 @@
 
 public class Pizza {
-  int pizzaNummer;
-  String pizzaNavn;
-  String pizzaIngredienser;
-  int pizzaPris;
+ private int pizzaNummer;
+ private String pizzaNavn;
+ private String pizzaIngredienser;
+ private int pizzaPris;
 
   public Pizza(int pizzaNummer, String pizzaNavn, String pizzaIngredienser, int pizzaPris) {
     this.pizzaNummer = pizzaNummer;
