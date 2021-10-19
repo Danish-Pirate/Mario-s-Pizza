@@ -13,7 +13,6 @@ public class CreateOrder {
     listOfOrders = new ArrayList<>();
     singleOrder = new ArrayList<>();
 
-    System.out.println(menu);
 
     pizzaOrderDone = false;
     startMenu();
@@ -22,6 +21,7 @@ public class CreateOrder {
   public void checkPizzaNum() {
     Scanner input = new Scanner(System.in);
     do {
+      System.out.println(menu);
       System.out.println("Indtast pizza nummer");
       if (input.hasNextInt()) {
         int pizzaNum = input.nextInt();
@@ -43,6 +43,7 @@ public class CreateOrder {
 
     if (response.equals("ja")) {
       listOfOrders.add(singleOrder);
+      singleOrder = new ArrayList<>();
       startMenu();
     }
     if (response.equals("nej")) {
@@ -53,17 +54,31 @@ public class CreateOrder {
   public void startMenu() {
     while (true) {
       Scanner input = new Scanner(System.in);
-      System.out.println("Indtast hvad du vil.\n1: Se bestillinger\n2: Lav en bestilling.");
+      System.out.println("Indtast hvad du vil.\n1: Se bestillinger\n2: Lav en bestilling.\n3: Fjern bestilling");
       String selection = input.nextLine();
       if (selection.equals("1")) {
         if (listOfOrders.size() != 0) {
-          System.out.println(listOfOrders);
+          for (int i = 0; i < listOfOrders.size(); i++) {
+            System.out.println(listOfOrders.get(i));
+          }
         } else {
           System.out.println("Der er ingen bestillinger");
         }
       }
       if (selection.equals("2")) {
         checkPizzaNum();
+      }
+      if (selection.equals("3")) {
+        System.out.println("Vælg hvilken bestilling ska slettes i form af et tal.");
+        if (input.hasNextInt()) {
+          int removeOrderNum = input.nextInt();
+          removeOrderNum--;
+          listOfOrders.remove(removeOrderNum);
+          System.out.println("Bestilling fjernet");
+        }
+        else {
+          System.out.println("Det er ikke et nummer");
+        }
       }
     }
   }
