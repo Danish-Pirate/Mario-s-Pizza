@@ -8,6 +8,15 @@ public class CreateOrder {
   ArrayList<Pizza> singleOrder;
   boolean pizzaOrderDone;
 
+  // All Commands
+
+    final static private String YES= "ja";
+    final static private String NO= "nej";
+    final static private String DONE= "færdig";
+    final static private String[] commandsList= {YES,NO,DONE};
+
+
+
   public void createOrder() {
     menu = new MenuCreate();
     listOfOrders = new ArrayList<>();
@@ -18,37 +27,60 @@ public class CreateOrder {
     pizzaOrderDone = false;
     startMenu();
   }
+  public static boolean orderDone=true;
 
   public void checkPizzaNum() {
     Scanner input = new Scanner(System.in);
+
     do {
       System.out.println("Indtast pizza nummer");
       if (input.hasNextInt()) {
         int pizzaNum = input.nextInt();
         for (int i = 0; i < menu.pizzaList.size(); i++) {
           if (pizzaNum == menu.pizzaList.get(i).getPizzaNummer()) {
-            singleOrder.add(menu.pizzaList.get(i));
-          }
+            singleOrder.add(menu.pizzaList.get(i));}
         }
         System.out.println(singleOrder);
-      }
+        System.out.println("Hvis du bliver du færdig med bestillingen indtast (færdig)");
+          }
       ordreDone();
-    } while (!pizzaOrderDone);
+    } while (orderDone);
   }
 
-  public void ordreDone() {
+
+  public static String getJaellerNej() {
+    Scanner Scanner= new Scanner(System.in);
+    while (true) {
+      String input = Scanner.nextLine();
+      if (input.equals(YES) || input.equals(NO)){
+        return input;
+      }else{
+        System.out.println("ja eller nej?");
+      }
+    }
+  }
+
+
+
+      public void ordreDone() {
     Scanner input1 = new Scanner(System.in);
-    System.out.println("Er ordren færdig? ja/nej");
     String response = input1.nextLine();
-
-    if (response.equals("ja")) {
-      listOfOrders.add(singleOrder);
-      startMenu();
-    }
-    if (response.equals("nej")) {
-      checkPizzaNum();
-    }
+        if (response.equals(DONE)){
+          System.out.println("Er du sikkert?");
+          String answer= getJaellerNej();
+          if (answer.equals(YES)){
+            listOfOrders.add(singleOrder);
+            orderDone=false;
+            startMenu();
+          }
+          if (answer.equals(NO)){
+            orderDone=false;
+            checkPizzaNum();
+          }
+        }
   }
+
+
 
   public void startMenu() {
     while (true) {
